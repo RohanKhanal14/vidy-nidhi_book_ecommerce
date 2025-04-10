@@ -26,10 +26,7 @@ const userPersistConfig = {
 
 //wrap reducers with "persist config"
 
-const persistedUserReducer = persistReducer(
-  userPersistConfig,
-  userReducer,
-); // persist the user data in local storage
+const persistedUserReducer = persistReducer(userPersistConfig, userReducer); // persist the user data in local storage
 // persist the user data in local storage
 
 // flow of redux = call action from dispatch - reducer there is action that change state.
@@ -39,19 +36,12 @@ export const store = configureStore({
     [api.reducerPath]: api.reducer, // rtk-query api
     user: persistedUserReducer, // user slice
   },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-        serializableCheck: {
-            ignoredActions: [
-            FLUSH,
-            REHYDRATE,
-            PAUSE,
-            PERSIST,
-            PURGE,
-            REGISTER,
-            ],
-        },
-        }).concat(api.middleware), // rtk-query middleware
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(api.middleware), // rtk-query middleware
 }); // create the store
 
 setupListeners(store.dispatch); // setup listeners for rtk-query
@@ -59,6 +49,6 @@ setupListeners(store.dispatch); // setup listeners for rtk-query
 export const persistor = persistStore(store); // create the persistor
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;

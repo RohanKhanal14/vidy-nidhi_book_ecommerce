@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -9,11 +11,22 @@ const Footer = () => {
             {/* Column 1: About */}
             <div>
               <div className="flex items-center mb-4">
-                <span className="text-yellow-500 mr-1">📚</span>
-                <span className="text-2xl font-bold">
-                  <span className="text-yellow-500">VIDYA</span>
-                  <span className="text-[#c41e3a]">NIDHI</span>
-                </span>
+                <Link
+                  href="/"
+                  className="flex items-center text-[#8b1a1a] dark:text-[#e06666] font-bold text-2xl"
+                >
+                  <Image
+                    src="/logo.png"
+                    alt="Logo"
+                    width={100}
+                    height={100}
+                    className="ml-2 h-11 w-9"
+                  />
+                  <span className="text-2xl ml-2 font-bold">
+                    <span className="text-yellow-500">VIDYA</span>
+                    <span className="text-[#c41e3a]">NIDHI</span>
+                  </span>
+                </Link>
               </div>
               <p className="mb-6">
                 BookSwap is your online marketplace for buying, selling, and

@@ -33,6 +33,7 @@ const userSlice = createSlice({
     },
   },
 });
-export const { setUser, logout, authStatus, setEmailVerified } = userSlice.actions;
+export const { setUser, logout, authStatus, setEmailVerified } =
+  userSlice.actions;
 export default userSlice.reducer; // This is the reducer function that will be used in the store
 // to manage the user state.

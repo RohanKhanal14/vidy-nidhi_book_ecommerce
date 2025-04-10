@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const BookLoader = () => {
-  return (
-    <div>Books are loading......</div>
-  )
-}
+  return <div>Books are loading......</div>;
+};
 
-export default BookLoader
+export default BookLoader;
