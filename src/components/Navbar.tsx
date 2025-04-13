@@ -35,7 +35,7 @@ const Navbar = () => {
 
   // const isLogin = useSelector((state: RootState) => state.user.isLogin);
   // const user = useSelector((state: RootState) => state.user.user);
-  const isLogin = true;
+  const isLogin = false;
   const user = {
     name: "John Doe",
     profilePicture: "/placeholder.svg",
@@ -243,12 +243,12 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link href="/login">
+              <Link href="/signin">
                 <button
                   type="submit"
                   className="bg-[#8b1a1a] hover:bg-[#6b1414] text-white px-4 py-2 rounded flex items-center"
                 >
-                  Login
+                  Sign in
                   <LogIn size={18} className="ml-2" />
                 </button>
               </Link>
@@ -456,13 +456,13 @@ const Navbar = () => {
                 <span>Sign Out</span>
               </button>
             ) : (
-              <Link href="/login">
+              <Link href="/signin">
                 <button
                   onClick={handleLogout}
                   className="w-full mt-4 flex items-center justify-center space-x-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 py-2 rounded-md"
                 >
                   <LogIn size={18} />
-                  <span>Login</span>
+                  <span>Sign in</span>
                 </button>
               </Link>
             )}

@@ -42,7 +42,7 @@ const BookCard = ({
     : 0;
 
   return (
-    <Link href={`/book/${id}`}>
+    <Link href={`/books/${id}`}>
       <div className="transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.1)] bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
         <div className="relative aspect-[2/3] overflow-hidden">
           <Image

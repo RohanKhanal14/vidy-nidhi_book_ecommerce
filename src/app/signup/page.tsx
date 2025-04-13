@@ -10,14 +10,26 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { BookOpen, Facebook, Github, Mail } from "lucide-react";
+import { BookOpen, Facebook, Loader2, Mail } from "lucide-react";
 import Link from "next/link";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+interface IFormInput {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  agreeToTerms: boolean;
+}
 
 const Signup = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>();
+  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const [signupLoading, setSignupLoading] = useState(false);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
@@ -68,7 +80,7 @@ const Signup = () => {
             </div>
           </CardHeader>
 
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -76,11 +88,17 @@ const Signup = () => {
                   <Input
                     id="firstName"
                     placeholder="John"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    {...register("firstName", {
+                      required: "First name is required",
+                    })}
+                    aria-invalid={errors.firstName ? "true" : "false"}
                     className="bg-[#FAF8F0]"
-                    required
                   />
+                  {errors.firstName && (
+                    <p className="text-red-500 text-xs">
+                      {errors.firstName.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
@@ -88,11 +106,17 @@ const Signup = () => {
                   <Input
                     id="lastName"
                     placeholder="Doe"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    {...register("lastName", {
+                      required: "Last name is required",
+                    })}
+                    aria-invalid={errors.lastName ? "true" : "false"}
                     className="bg-[#FAF8F0]"
-                    required
                   />
+                  {errors.lastName && (
+                    <p className="text-red-500 text-xs">
+                      {errors.lastName.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -102,11 +126,13 @@ const Signup = () => {
                   id="email"
                   type="email"
                   placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  {...register("email", { required: "Email is required" })}
+                  aria-invalid={errors.email ? "true" : "false"}
                   className="bg-[#FAF8F0]"
-                  required
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-xs">{errors.email.message}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -115,19 +141,30 @@ const Signup = () => {
                   id="password"
                   type="password"
                   placeholder="Create a strong password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  {...register("password", { required: "Password is required" })}
+                  aria-invalid={errors.password ? "true" : "false"}
                   className="bg-[#FAF8F0]"
-                  required
                 />
-                <p className="text-xs text-gray-500">
-                  Must be at least 8 characters with uppercase, lowercase,
-                  number, and special character.
-                </p>
+                {errors.password && (
+                  <p className="text-red-500 text-xs">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
 
-              <div className="flex items-start space-x-2 mb-4">
-                <Checkbox id="terms" className="mt-1" required />
+              <div className="flex items-center  space-x-2 mb-4">
+                <Checkbox
+                  id="terms"
+                  {...register("agreeToTerms", {
+                    required: "You must agree to the terms and conditions",
+                  })}
+                  aria-invalid={errors.agreeToTerms ? "true" : "false"}
+                />
+                {errors.agreeToTerms && (
+                  <p className="text-red-500 text-xs">
+                    {errors.agreeToTerms.message}
+                  </p>
+                )}
                 <Label htmlFor="terms" className="text-sm">
                   I agree to the{" "}
                   <Link
@@ -144,6 +181,7 @@ const Signup = () => {
                     Privacy Policy
                   </Link>
                 </Label>
+                  
               </div>
             </CardContent>
 
@@ -152,13 +190,20 @@ const Signup = () => {
                 type="submit"
                 className="w-full bg-[#800020] hover:bg-[#800020]/90"
               >
-                Sign up
+                {signupLoading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Signing up...
+                  </>
+                ) : (
+                  "Sign up"
+                )}
               </Button>
 
               <p className="mt-4 text-center text-sm text-gray-500">
                 Already have an account?{" "}
                 <Link
-                  href="/login"
+                  href="/signin"
                   className="font-semibold text-[#800020] hover:underline"
                 >
                   Sign in

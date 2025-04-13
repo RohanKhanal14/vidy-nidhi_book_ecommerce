@@ -120,3 +120,31 @@
     @apply bg-background text-foreground;
   }
 }
+/* Animation classes */
+.animate-fade-in {
+  animation: fade-in 0.4s ease forwards;
+}
+
+.animate-fade-out {
+  animation: fade-out 0.4s ease forwards;
+}
+
+.animate-page-transition {
+  animation: page-transition 0.5s ease-out forwards;
+}
+
+/* Add page transition to main content */
+main {
+  animation: page-transition 0.5s ease-out;
+}
+
+/* Custom animation for book icon in loader */
+@keyframes book-glow {
+  0% { filter: drop-shadow(0 0 0px rgba(128, 0, 32, 0.3)); }
+  50% { filter: drop-shadow(0 0 15px rgba(128, 0, 32, 0.6)); }
+  100% { filter: drop-shadow(0 0 0px rgba(128, 0, 32, 0.3)); }
+}
+
+.book-glow {
+  animation: book-glow 2s infinite ease-in-out;
+}

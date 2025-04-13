@@ -8,6 +8,7 @@ import BookCard from "@/components/BookCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Image from "next/image";
 
+
 // Sample book data
 const allBooks = [
   {
@@ -97,13 +98,23 @@ const allBooks = [
   },
   {
     id: "9",
-    title: "A Brief History of Time",
-    author: "Stephen Hawking",
-    price: 11.99,
+    title: "Becoming",
+    author: "Michelle Obama",
+    price: 18.99,
     coverImage:
-      "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=687",
-    condition: "Good" as const,
-    category: "Science",
+      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&q=80&w=688",
+    condition: "Like New" as const,
+    category: "Biography",
+  },
+  {
+    id: "10",
+    title: "Becoming",
+    author: "Michelle Obama",
+    price: 18.99,
+    coverImage:
+      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&q=80&w=688",
+    condition: "Like New" as const,
+    category: "Biography",
   },
 ];
 
@@ -119,6 +130,7 @@ const categories = [
   "Mystery & Thriller",
   "Science",
 ];
+
 
 type SortOption = "newest" | "price_low" | "price_high" | "alphabetical";
 
@@ -171,9 +183,7 @@ const Books = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-[#333333] mb-2">
-        All Books
-      </h1>
+      <h1 className="text-3xl font-bold text-[#333333] mb-2">All Books</h1>
       <p className="text-gray-500 mb-8">
         Browse our collection of new and used books
       </p>
@@ -271,14 +281,15 @@ const Books = () => {
       </div>
 
       {/* Condition Filters */}
-      
+
       {showFilters && (
         <div className="bg-gray-50 p-4 rounded-lg mb-6">
           <h3 className="font-medium mb-2">Book Condition</h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 ">
             <Button
               variant={filterCondition === null ? "default" : "outline"}
               size="sm"
+              className={`${filterCondition === null ? "bg-[#800020] hover:bg-[#800020]/90 text-white hover:text-white" : ""}`}
               onClick={() => setFilterCondition(null)}
             >
               Any
@@ -286,6 +297,7 @@ const Books = () => {
             <Button
               variant={filterCondition === "New" ? "default" : "outline"}
               size="sm"
+              className={`${filterCondition === "New" ? "bg-[#800020] hover:bg-[#800020]/90 text-white hover:text-white" : ""}`}
               onClick={() => setFilterCondition("New")}
             >
               New
@@ -293,6 +305,7 @@ const Books = () => {
             <Button
               variant={filterCondition === "Like New" ? "default" : "outline"}
               size="sm"
+              className={`${filterCondition === "Like New" ? "bg-[#800020] hover:bg-[#800020]/90 text-white hover:text-white" : ""}`}
               onClick={() => setFilterCondition("Like New")}
             >
               Like New
@@ -300,6 +313,7 @@ const Books = () => {
             <Button
               variant={filterCondition === "Very Good" ? "default" : "outline"}
               size="sm"
+              className={`${filterCondition === "Very Good" ? "bg-[#800020] hover:bg-[#800020]/90 text-white hover:text-white" : ""}`}
               onClick={() => setFilterCondition("Very Good")}
             >
               Very Good
@@ -307,6 +321,7 @@ const Books = () => {
             <Button
               variant={filterCondition === "Good" ? "default" : "outline"}
               size="sm"
+              className={`${filterCondition === "Good" ? "bg-[#800020] hover:bg-[#800020]/90 text-white hover:text-white" : ""}`}
               onClick={() => setFilterCondition("Good")}
             >
               Good
@@ -314,6 +329,7 @@ const Books = () => {
             <Button
               variant={filterCondition === "Acceptable" ? "default" : "outline"}
               size="sm"
+              className={`${filterCondition === "Acceptable" ? "bg-[#800020] hover:bg-[#800020]/90 text-white hover:text-white" : ""}`}
               onClick={() => setFilterCondition("Acceptable")}
             >
               Acceptable
@@ -471,9 +487,7 @@ const BookListItem = ({ book }: BookListItemProps) => {
               variant="ghost"
               size="sm"
               onClick={toggleWishlist}
-              className={
-                isWishlisted ? "text-[#800020]" : "text-gray-400"
-              }
+              className={isWishlisted ? "text-[#800020]" : "text-gray-400"}
             >
               Save
             </Button>
